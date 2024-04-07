@@ -3,13 +3,15 @@
 
 #include <QPushButton>
 
-class Lights : public QPushButton {
+class Light : public QPushButton
+{
     Q_OBJECT
+
 public:
+    Light(QWidget* parent = nullptr);
+
     enum Width { Large, Small };
     enum Color { Dark_Yellow, Bright_Yellow, Dark_Red, Bright_Red };
-
-    Lights(QWidget* parent = nullptr);
 
     void setWidth(Width width);
     void setColor(Color color);
@@ -17,6 +19,18 @@ public:
 private:
     Width m_width;
     Color m_color;
+};
+
+class RoundLight : public Light
+{
+    Q_OBJECT
+
+public:
+    RoundLight(QWidget* parent = nullptr, int size = 140);
+
+private:
+    int m_size;
+    void setSize(int m_size);
 };
 
 #endif // LIGHTS_H

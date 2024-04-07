@@ -20,17 +20,20 @@ private:
 
 private:
     int m_base = 5;
-    Lights* Hu[4];
-    Lights* Hl[4];
-    Lights* Mu[11];
-    Lights* Ml[4];
-    Lights* Su[11];
-    Lights* Sl[4];
 
-    PatternMaker* patternMaker = new PatternMaker(m_base);
+    RoundLight* roundLight;
+
+    Light* Hu[4];
+    Light* Hl[4];
+    Light* Mu[11];
+    Light* Ml[4];
+    Light* Su[11];
+    Light* Sl[4];
+
+    PatternMaker* patternMaker;
 
 public:
-    Watch(QWidget *parent = nullptr);
+    explicit Watch(QWidget* parent = nullptr);
     ~Watch();
 
 private slots:

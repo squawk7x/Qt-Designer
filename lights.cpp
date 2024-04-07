@@ -1,6 +1,6 @@
 #include "lights.h"
 
-Lights::Lights(QWidget* parent)
+Light::Light(QWidget* parent)
     : QPushButton(parent)
     , m_width(Large)
     , m_color(Dark_Yellow)
@@ -10,18 +10,18 @@ Lights::Lights(QWidget* parent)
     setColor(Dark_Yellow); // Default color
 }
 
-void Lights::setWidth(Width width)
+void Light::setWidth(Width width)
 {
     m_width = width;
     // Adjust size based on width
-    // if (width == Small) {
-    //     setFixedSize(40, height());
-    // } else {
-    //     setFixedSize(120, height());
-    // }
+    if (width == Small) {
+        setFixedSize(40, height());
+    } else {
+        setFixedSize(148, height());
+    }
 }
 
-void Lights::setColor(Color color)
+void Light::setColor(Color color)
 {
     m_color = color;
     // Change color based on selected color
@@ -39,4 +39,10 @@ void Lights::setColor(Color color)
         setStyleSheet("background-color: #FF0000;"); // Bright Red color
         break;
     }
+};
+
+RoundLight::RoundLight(QWidget* parent, int size)
+    : Light(parent)
+{
+    this->setFixedSize(size, size);
 }
