@@ -14,11 +14,11 @@ void Lights::setWidth(Width width)
 {
     m_width = width;
     // Adjust size based on width
-    if (width == Small) {
-        setFixedSize(40, height());
-    } else {
-        setFixedSize(120, height());
-    }
+    // if (width == Small) {
+    //     setFixedSize(40, height());
+    // } else {
+    //     setFixedSize(120, height());
+    // }
 }
 
 void Lights::setColor(Color color)
