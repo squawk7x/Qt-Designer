@@ -4,6 +4,7 @@
 #include <QWidget>
 #include "lights.h"
 #include "patternMaker.h"
+#include "qcheckbox.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -23,6 +24,8 @@ private:
     Ui::Form* ui;
     // or include private static instance:
     // Ui::Form ui;
+    QCheckBox* cb_roundLight;
+    QCheckBox* cb_transparency;
 
 private:
     int m_base = 5;
@@ -40,5 +43,7 @@ private:
 
 private slots:
     void updateIndicator();
+    void updateRoundLight(bool checked);
+    void updateTransparency(bool checked);
 };
 #endif // WATCH_H
