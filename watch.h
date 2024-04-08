@@ -15,8 +15,14 @@ class Watch : public QWidget
 {
     Q_OBJECT
 
+public:
+    explicit Watch(QWidget* parent = nullptr);
+    virtual ~Watch();
+
 private:
     Ui::Form* ui;
+    // or include private static instance:
+    // Ui::Form ui;
 
 private:
     int m_base = 5;
@@ -31,10 +37,6 @@ private:
     Light* Sl[4];
 
     PatternMaker* patternMaker;
-
-public:
-    explicit Watch(QWidget* parent = nullptr);
-    ~Watch();
 
 private slots:
     void updateIndicator();

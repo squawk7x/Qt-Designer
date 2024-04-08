@@ -1,12 +1,15 @@
 #include "watch.h"
 #include <QTimer>
-#include "./ui_form.h"
+#include "ui_form.h" //include user interface
 
 Watch::Watch(QWidget *parent)
-    : QWidget(parent)
-    , ui(new Ui::Form)
+    : QWidget(parent)  // subclass a standard Qt widget
+    , ui(new Ui::Form) // include private instance of ui
 {
     ui->setupUi(this);
+    // ui->retranslateUi(this); // for language changes
+
+    // setAttribute(Qt::WA_TranslucentBackground);
 
     roundLight = new RoundLight(findChild<RoundLight *>("blinker"));
 
@@ -44,6 +47,7 @@ Watch::Watch(QWidget *parent)
     }
 
     QTimer *timer = new QTimer(this);
+
     connect(timer, &QTimer::timeout, this, &Watch::updateIndicator);
     timer->start(1000);
 }
@@ -53,13 +57,12 @@ void Watch::updateIndicator()
     patternMaker->makePatterns();
 
     static bool isDarkYellow = true; // Variable to toggle color state
-
     if (isDarkYellow) {
         roundLight->setStyleSheet(
             "QPushButton { border-radius: 70px; background-color: #808000; }");
     } else {
         roundLight->setStyleSheet(
-            "QPushButton { border-radius: 70px; background-color: #FFFF00; }"); // Bright_Yellow
+            "QPushButton { border-radius: 70px; background-color: #FFFF00; }");
     }
     isDarkYellow = !isDarkYellow;
 
