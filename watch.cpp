@@ -1,9 +1,7 @@
 #include "watch.h"
 #include <QTimer>
 #include "ui_form.h" //include user interface
-#include <iostream>
 
-using namespace std;
 
 Watch::Watch(QWidget *parent)
     : QWidget(parent)  // subclass a standard Qt widget
@@ -12,13 +10,13 @@ Watch::Watch(QWidget *parent)
     ui->setupUi(this);
     // ui->retranslateUi(this); // for language changes
 
-    cb_transparency = new QCheckBox(findChild<QCheckBox *>("cb_transparency"));
+    cb_transparency = findChild<QCheckBox *>("ui_cb_transparency");
     connect(cb_transparency, &QCheckBox::toggled, this, &Watch::updateTransparency);
 
-    roundLight = new RoundLight(findChild<RoundLight *>("blinker"));
+    roundLight = findChild<RoundLight *>("ui_roundLight");
     roundLight->setStyleSheet("QPushButton { border-radius: 70px; background-color: #808000; }");
 
-    cb_roundLight = new QCheckBox(findChild<QCheckBox *>("cb_blinker"));
+    cb_roundLight = findChild<QCheckBox *>("ui_cb_roundLight");
     connect(cb_roundLight, &QCheckBox::toggled, this, &Watch::updateRoundLight);
 
     patternMaker = new PatternMaker(5);
@@ -110,8 +108,6 @@ void Watch::updateIndicator()
 
 Watch::~Watch()
 {
-    delete cb_roundLight;
     delete patternMaker;
-    delete roundLight;
     delete ui;
 }
