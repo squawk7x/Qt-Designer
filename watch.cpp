@@ -7,8 +7,7 @@ Watch::Watch(QWidget *parent)
     : QWidget(parent)  // subclass a standard Qt widget
     , ui(new Ui::Form) // include private instance of ui
 {
-    ui->setupUi(this);
-    // ui->retranslateUi(this); // for language changes
+    ui->setupUi(this); // ui->retranslateUi(this); for language changes
 
     cb_transparency = findChild<QCheckBox *>("ui_cb_transparency");
     connect(cb_transparency, &QCheckBox::toggled, this, &Watch::updateTransparency);
@@ -58,9 +57,9 @@ Watch::Watch(QWidget *parent)
 void Watch::updateRoundLight(bool checked)
 {
     if (checked) {
-        roundLight->hide();
-    } else {
         roundLight->show();
+    } else {
+        roundLight->hide();
     }
 }
 
