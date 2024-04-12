@@ -61,6 +61,7 @@ void Watch::updateRoundLight(bool checked)
     } else {
         roundLight->hide();
     }
+    qInfo() << "roundLight" << checked;
 }
 
 void Watch::updateTransparency(bool checked)
@@ -109,4 +110,15 @@ Watch::~Watch()
 {
     delete patternMaker;
     delete ui;
+}
+
+void Watch::on_ui_roundLight_clicked()
+{
+    if (roundLight->isHidden()) {
+        cb_roundLight->setCheckState(Qt::Checked);
+        roundLight->show();
+    } else {
+        cb_roundLight->setCheckState(Qt::Unchecked);
+        roundLight->hide();
+    }
 }

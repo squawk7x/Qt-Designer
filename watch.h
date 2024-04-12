@@ -45,5 +45,6 @@ private slots:
     void updateIndicator();
     void updateRoundLight(bool checked);
     void updateTransparency(bool checked);
+    void on_ui_roundLight_clicked();
 };
 #endif // WATCH_H
