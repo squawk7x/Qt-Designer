@@ -8,8 +8,8 @@ PatternMaker::PatternMaker(int base)
     m_Hl.resize(m_base - 1);
     m_Mu.resize(60 / m_base - 1);
     m_Ml.resize(m_base - 1);
-    m_Su.resize(11);
-    m_Sl.resize(60 / m_base - 1);
+    m_Su.resize(60 / m_base - 1);
+    m_Sl.resize(m_base);
 }
 
 void PatternMaker::makePatterns()
