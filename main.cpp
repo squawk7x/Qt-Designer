@@ -1,4 +1,4 @@
-#include "watch.h"
+#include "watchUi.h"
 
 #include <QApplication>
 #include <QDebug>
@@ -11,7 +11,7 @@ int main(int argc, char *argv[])
     // qWarning() << "Warning";
     // qCritical() << "Critical";
     // qFatal() << "Fatal";
-    Watch w;
+    WatchUi w;
     w.show();
     return a.exec();
 }

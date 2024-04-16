@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.5)
 
 project(
-  Watch
+  WatchUi
   VERSION 0.1
   LANGUAGES CXX)
 
@@ -17,8 +17,8 @@ find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets Core)
 
 set(PROJECT_SOURCES
     main.cpp
-    watch.cpp
-    watch.h
+	watchUi.cpp
+	watchUi.h
     form.ui
     lights.cpp
     lights.h
@@ -26,7 +26,7 @@ set(PROJECT_SOURCES
     patternMaker.h)
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
-  qt_add_executable(Watch MANUAL_FINALIZATION ${PROJECT_SOURCES} form.h
+  qt_add_executable(WatchUi MANUAL_FINALIZATION ${PROJECT_SOURCES} form.h
 					form.cpp form.ui)
 
   # Define target properties for Android with Qt 6 as: set_property(TARGET Watch
@@ -35,27 +35,27 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
   # https://doc.qt.io/qt-6/qt-add-executable.html#target-creation
 else()
   if(ANDROID)
-	add_library(Watch SHARED ${PROJECT_SOURCES})
+	add_library(WatchUi SHARED ${PROJECT_SOURCES})
 
     # Define properties for Android with Qt 5 after find_package() calls as:
     # set(ANDROID_PACKAGE_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/android")
   else()
-	add_executable(Watch ${PROJECT_SOURCES})
+	add_executable(WatchUi ${PROJECT_SOURCES})
   endif()
 endif()
 
-target_link_libraries(Watch PRIVATE Qt${QT_VERSION_MAJOR}::Widgets
-									Qt${QT_VERSION_MAJOR}::Core)
+target_link_libraries(WatchUi PRIVATE Qt${QT_VERSION_MAJOR}::Widgets
+									  Qt${QT_VERSION_MAJOR}::Core)
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1. If
 # you are developing for iOS or macOS you should consider setting an explicit,
 # fixed bundle identifier manually though.
 if(${QT_VERSION} VERSION_LESS 6.1.0)
-  set(BUNDLE_ID_OPTION MACOSX_BUNDLE_GUI_IDENTIFIER com.example.Watch)
+  set(BUNDLE_ID_OPTION MACOSX_BUNDLE_GUI_IDENTIFIER com.example.WatchUi)
 endif()
 
 set_target_properties(
-  Watch
+  WatchUi
   PROPERTIES MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
 			 ${BUNDLE_ID_OPTION} MACOSX_BUNDLE_SHORT_VERSION_STRING
 			 ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR} MACOSX_BUNDLE
@@ -64,11 +64,11 @@ set_target_properties(
 
 include(GNUInstallDirs)
 install(
-  TARGETS Watch
+  TARGETS WatchUi
   BUNDLE DESTINATION .
   LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
   RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
 
 if(QT_VERSION_MAJOR EQUAL 6)
-  qt_finalize_executable(Watch)
+  qt_finalize_executable(WatchUi)
 endif()

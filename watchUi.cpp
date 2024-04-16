@@ -1,22 +1,21 @@
-#include "watch.h"
+#include "watchUi.h"
 #include <QTimer>
 #include "ui_form.h" //include user interface
 
-
-Watch::Watch(QWidget *parent)
+WatchUi::WatchUi(QWidget *parent)
     : QWidget(parent)  // subclass a standard Qt widget
     , ui(new Ui::Form) // include private instance of ui
 {
     ui->setupUi(this); // ui->retranslateUi(this); for language changes
 
     cb_transparency = findChild<QCheckBox *>("ui_cb_transparency");
-    connect(cb_transparency, &QCheckBox::toggled, this, &Watch::updateTransparency);
+    connect(cb_transparency, &QCheckBox::toggled, this, &WatchUi::updateTransparency);
 
     roundLight = findChild<RoundLight *>("ui_roundLight");
     roundLight->setStyleSheet("QPushButton { border-radius: 70px; background-color: #808000; }");
 
     cb_roundLight = findChild<QCheckBox *>("ui_cb_roundLight");
-    connect(cb_roundLight, &QCheckBox::toggled, this, &Watch::updateRoundLight);
+    connect(cb_roundLight, &QCheckBox::toggled, this, &WatchUi::updateRoundLight);
 
     patternMaker = new PatternMaker(5);
 
@@ -24,11 +23,13 @@ Watch::Watch(QWidget *parent)
         QString buttonName = QString("Hu%1").arg(i);
         Hu[i] = findChild<Light *>(buttonName);
         Hu[i]->setWidth(Light::Width::Large);
+        Hu[i]->setColor(Light::Color::Dark_Red);
     }
     for (int i = 0; i < 4; ++i) {
         QString buttonName = QString("Hl%1").arg(i);
         Hl[i] = findChild<Light *>(buttonName);
         Hl[i]->setWidth(Light::Width::Large);
+        Hl[i]->setColor(Light::Color::Dark_Red);
     }
     for (int i = 0; i < 11; ++i) {
         QString buttonName = QString("Mu%1").arg(i);
@@ -50,11 +51,11 @@ Watch::Watch(QWidget *parent)
     }
 
     QTimer *timer = new QTimer(this);
-    connect(timer, &QTimer::timeout, this, &Watch::updateIndicator);
+    connect(timer, &QTimer::timeout, this, &WatchUi::updateIndicator);
     timer->start(1000);
 }
 
-void Watch::updateRoundLight(bool checked)
+void WatchUi::updateRoundLight(bool checked)
 {
     if (checked) {
         roundLight->show();
@@ -64,7 +65,7 @@ void Watch::updateRoundLight(bool checked)
     qInfo() << "roundLight" << checked;
 }
 
-void Watch::updateTransparency(bool checked)
+void WatchUi::updateTransparency(bool checked)
 {
     {
         if (checked) {
@@ -75,7 +76,7 @@ void Watch::updateTransparency(bool checked)
     }
 }
 
-void Watch::updateIndicator()
+void WatchUi::updateIndicator()
 {
     patternMaker->makePatterns();
 
@@ -106,13 +107,13 @@ void Watch::updateIndicator()
     }
 }
 
-Watch::~Watch()
+WatchUi::~WatchUi()
 {
     delete patternMaker;
     delete ui;
 }
 
-void Watch::on_ui_roundLight_clicked()
+void WatchUi::on_ui_roundLight_clicked()
 {
     if (roundLight->isHidden()) {
         cb_roundLight->setCheckState(Qt::Checked);

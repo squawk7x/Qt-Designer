@@ -1,5 +1,5 @@
-#ifndef WATCH_H
-#define WATCH_H
+#ifndef WATCHUI_H
+#define WATCHUI_H
 
 #include <QWidget>
 #include "lights.h"
@@ -12,13 +12,13 @@ class Form;
 }
 QT_END_NAMESPACE
 
-class Watch : public QWidget
+class WatchUi : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit Watch(QWidget* parent = nullptr);
-    virtual ~Watch();
+    explicit WatchUi(QWidget* parent = nullptr);
+    virtual ~WatchUi();
 
 private:
     Ui::Form* ui;
@@ -47,4 +47,4 @@ private slots:
     void updateTransparency(bool checked);
     void on_ui_roundLight_clicked();
 };
-#endif // WATCH_H
+#endif // WATCHUI_H
